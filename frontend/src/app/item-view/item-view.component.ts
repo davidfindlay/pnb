@@ -44,4 +44,17 @@ export class ItemViewComponent implements OnInit {
     }
   }
 
+  // Navigation functions
+  previous() {
+    console.log('Previous');
+  }
+
+  album() {
+    console.log('Album');
+  }
+
+  next() {
+    console.log('Next');
+  }
+
 }

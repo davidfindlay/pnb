@@ -1,11 +1,25 @@
 <main role="main">
   <div class="content">
-    <h1 class="item-title">{{item.title}}</h1>
-    <div class="image-container">
-      <img data-src="assets/testassets/{{getFileUrl(item.file)}}" alt="{{item.title}}">
-    </div>
-    <div class="item-info">
-      {{item.description}}
-    </div>
+    <h1 class="item-title" *ngIf="item.title != null">{{item.title}}</h1>
+    <nav id="image-navigation" class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-nav mr-auto nav-fill w-100">
+        <li class="nav-item">
+          <a (click)="previous()">Previous Image</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['../']">Back to Album</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="next()">Next Image</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+  <div class="image-container">
+    <img data-src="assets/testassets/{{getFileUrl(item.file)}}" alt="{{item.title}}">
+  </div>
+  <div class="item-info">
+    {{item.description}}
   </div>
 </main>
