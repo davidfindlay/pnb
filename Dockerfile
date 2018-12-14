@@ -8,6 +8,7 @@ RUN npm install -g @angular/cli
 WORKDIR /
 ADD /frontend/ /frontend/
 WORKDIR /frontend
+RUN npm install
 RUN ng build
 WORKDIR /code
 ADD requirements.txt /code/
