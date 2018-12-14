@@ -5,10 +5,11 @@ RUN mkdir /static
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt install nodejs
 RUN npm install -g @angular/cli
-WORKDIR /frontend
+WORKDIR /
+ADD /frontend/ /frontend/
 RUN ng build
 WORKDIR /static
-ADD /frontend/dist/frontend/* /static/
+COPY /frontend/dist/frontend/* .
 WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
