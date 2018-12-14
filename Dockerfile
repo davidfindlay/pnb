@@ -2,6 +2,8 @@ FROM python:3
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 RUN mkdir /static
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN npm install -g @angular/cli
 WORKDIR /frontend
 RUN ng build
 WORKDIR /static
