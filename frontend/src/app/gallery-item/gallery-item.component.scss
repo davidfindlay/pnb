@@ -1,0 +1,18 @@
+.card-img-top {
+  height: 185px;
+  overflow:hidden;
+  text-align:center;
+  position:relative;
+}
+
+.card-img-top img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin: auto;
+}
