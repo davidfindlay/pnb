@@ -7,10 +7,11 @@ RUN apt install nodejs
 RUN npm install -g @angular/cli
 WORKDIR /
 ADD /frontend/ /frontend/
+WORKDIR /frontend
 RUN ng build
-WORKDIR /static
-COPY /frontend/dist/frontend/* .
 WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
+WORKDIR /code/static
+COPY /frontend/dist/frontend/* /code/static/
