@@ -1,0 +1,28 @@
+.image-container {
+  text-align: center;
+  display: grid;
+  height: 100%;
+  width: 100%;
+}
+
+.image-container img {
+  display: block;
+  max-width: 100%;
+  max-height: 75vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.item-info {
+  text-align: center;
+}
+
+.item-title {
+  margin-top: 0.25em;
+  padding: 5px;
+  background-color: #e9ecef;
+}
+
+#image-navigation {
+  margin-bottom: 0.25em;
+}
