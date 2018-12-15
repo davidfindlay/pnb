@@ -2,6 +2,7 @@
 *.pyc
 settings.ini
 web_variables.env
+/postgres
 
 ### Python template
 # Byte-compiled / optimized / DLL files
