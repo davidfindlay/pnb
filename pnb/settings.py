@@ -23,12 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -115,7 +116,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
+STATICFILES_STORAGE = ['whitenoise.storage.CompressedManifestStaticFilesStorage',
+                       'spa.storage.SPAStaticFilesStorage']
 
 # We are using python-decouple (https://pypi.org/project/python-decouple/) to remove sensitive information from
 # Django settings.
