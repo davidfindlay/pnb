@@ -1,7 +1,7 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
-RUN mkdir /static
+RUN mkdir /code/static
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt install nodejs
 RUN npm install -g @angular/cli
