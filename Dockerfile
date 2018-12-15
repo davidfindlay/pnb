@@ -14,5 +14,6 @@ WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
-WORKDIR /code/static
-COPY /frontend/dist/frontend/* /code/static/
+WORKDIR /frontend/dist/frontend/
+COPY . /code/static/
+WORKDIR /code
