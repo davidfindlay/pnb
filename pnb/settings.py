@@ -118,7 +118,7 @@ USE_TZ = True
 WHITENOISE_INDEX_FILE = True
 WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
 
 # We are using python-decouple (https://pypi.org/project/python-decouple/) to remove sensitive information from
 # Django settings.
