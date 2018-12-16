@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'rest_framework',
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -146,6 +148,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Add static_root for django admin page.
+STATIC_ROOT = '/static/'
 
 # We are using python-decouple (https://pypi.org/project/python-decouple/) to remove sensitive information from
 # Django settings.
