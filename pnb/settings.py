@@ -145,7 +145,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 WHITENOISE_INDEX_FILE = True
-WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'static')
+# WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
 
@@ -157,3 +157,5 @@ SECRET_KEY = config('SECRET_KEY')
 if os.environ['DJANGO_SERVER_TYPE'] == 'development':
     DEBUG = config('DEBUG_TEST')
     ALLOWED_HOSTS = config('ALLOWED_HOSTS_TEST', cast=Csv())
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
