@@ -1,15 +1,14 @@
 from django.contrib.auth import get_user_model
 
-from rest_framework import permissions, viewsets, status
-from rest_framework.response import Response
+from rest_framework import viewsets
 
-from .serializers import UserSerializer, ProfileSerializer
-from .models import Profile
-from api.extra_perms import IsAuthenticatedOrWriteOnly
+from .serializers import UserSerializer
+from api.extra_perms import IsAuthenticatedOrWriteOnly, IsOwnerOrAdmin
 
 
 # TODO: Change permissions to group-based views.
 # TODO: Add Password Changing
+# TODO: Add admin interface for User API (PW change, etc.)
 UserModel = get_user_model()
 
 
@@ -21,3 +20,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticatedOrWriteOnly,)
 
+    # Only owners or admins can modify user accounts.
+    # Still need password to change.
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = (IsAuthenticatedOrWriteOnly,)
+        if self.request.method == 'PATCH' or self.request.method == 'PUT':
+            self.permission_classes = (IsOwnerOrAdmin,)
+        return super().get_permissions()

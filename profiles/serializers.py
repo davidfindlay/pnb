@@ -44,16 +44,18 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        # update users base information.
-        instance.username = validated_data.get('username', instance.username)
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.email = validated_data.get('email', instance.email)
-        instance.save()
+        # Password checked before modifying user accounts.
+        if instance.check_password(validated_data['password']):
+            # update users base information.
+            instance.username = validated_data.get('username', instance.username)
+            instance.first_name = validated_data.get('first_name', instance.first_name)
+            instance.last_name = validated_data.get('last_name', instance.last_name)
+            instance.email = validated_data.get('email', instance.email)
+            instance.save()
 
-        # update profile information
-        profile_data = validated_data.pop('profile', None)
-        profile = instance.profile
-        profile.bio = profile_data['bio']
-        profile.save()
+            # update profile information
+            profile_data = validated_data.pop('profile', None)
+            profile = instance.profile
+            profile.bio = profile_data['bio']
+            profile.save()
         return instance
