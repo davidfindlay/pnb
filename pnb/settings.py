@@ -143,11 +143,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-WHITENOISE_INDEX_FILE = True
-# WHITENOISE_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # We are using python-decouple (https://pypi.org/project/python-decouple/) to remove sensitive information from
 # Django settings.
@@ -158,4 +156,3 @@ if os.environ['DJANGO_SERVER_TYPE'] == 'development':
     DEBUG = config('DEBUG_TEST')
     ALLOWED_HOSTS = config('ALLOWED_HOSTS_TEST', cast=Csv())
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
