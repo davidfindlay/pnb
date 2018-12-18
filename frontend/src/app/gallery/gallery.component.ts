@@ -35,4 +35,8 @@ export class GalleryComponent implements OnInit {
 
   }
 
+  blogView() {
+    this.router.navigate(['blog'], {relativeTo: this.route});
+  }
+
 }
