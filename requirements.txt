@@ -4,3 +4,4 @@ python-decouple
 whitenoise
 django-spa
 djangorestframework
+djangorestframework-simplejwt
