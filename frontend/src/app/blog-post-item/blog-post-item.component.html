@@ -1,0 +1,7 @@
+<h2 *ngIf="galleryItem.title != null">{{galleryItem.title}}</h2>
+<a routerLink="{{galleryItem.id}}">
+  <img data-src="assets/testassets/{{getFileUrl(galleryItem.file)}}" alt="{{galleryItem.title}}">
+</a>
+<p *ngIf="galleryItem.description != null">
+  {{galleryItem.description}}
+</p>
