@@ -6,8 +6,8 @@ import { AuthService } from 'ngx-auth';
 import {TokenStorage} from './token.service';
 
 interface AccessData {
-  accessToken: string;
-  refreshToken: string;
+  access: string;
+  refresh: string;
 }
 
 @Injectable()
@@ -51,7 +51,7 @@ export class AuthenticationService implements AuthService {
       .getRefreshToken()
       .pipe(
         switchMap((refreshToken: string) =>
-          this.http.post(`http://localhost:3000/refresh`, { refreshToken })
+          this.http.post(`http://localhost:8000/api/token/refresh/`, { refreshToken })
         ),
         tap((tokens: AccessData) => this.saveAccessData(tokens)),
         catchError((err) => {
@@ -70,7 +70,7 @@ export class AuthenticationService implements AuthService {
    * @returns {boolean}
    */
   public refreshShouldHappen(response: HttpErrorResponse): boolean {
-    return response.status === 401
+    return response.status === 401;
   }
 
   /**
@@ -87,8 +87,9 @@ export class AuthenticationService implements AuthService {
    * EXTRA AUTH METHODS
    */
 
-  public login(): Observable<any> {
-    return this.http.post(`http://localhost:3000/login`, { })
+  public login(username, password): Observable<any> {
+    console.log('login request for ' + username);
+    return this.http.post(`http://localhost:8000/api/token/`, {'username': username, 'password': password})
       .pipe(tap((tokens: AccessData) => this.saveAccessData(tokens)));
   }
 
@@ -97,7 +98,6 @@ export class AuthenticationService implements AuthService {
    */
   public logout(): void {
     this.tokenStorage.clear();
-    location.reload(true);
   }
 
   /**
@@ -106,10 +106,16 @@ export class AuthenticationService implements AuthService {
    * @private
    * @param {AccessData} data
    */
-  private saveAccessData({ accessToken, refreshToken }: AccessData) {
+  private saveAccessData({ access, refresh }: AccessData) {
+
+    if (access == null || refresh == null) {
+      this.tokenStorage.clear();
+      return;
+    }
+
     this.tokenStorage
-      .setAccessToken(accessToken)
-      .setRefreshToken(refreshToken);
+      .setAccessToken(access)
+      .setRefreshToken(refresh);
   }
 
 }

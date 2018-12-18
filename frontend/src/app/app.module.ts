@@ -20,29 +20,7 @@ import {AuthenticationModule} from './authentication/authentication.module';
 import {LoginComponent} from './login/login.component';
 import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
 import {LoginLayoutComponent} from './layouts/login-layout/login-layout.component';
-import {ProtectedGuard} from 'ngx-auth';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: HomeLayoutComponent,
-    canActivate: [ProtectedGuard],
-    children: [
-      {path: 'newsfeed', component: NewsfeedComponent},
-      {path: ':album-id', component: GalleryComponent},
-      {path: ':album-id/blog', component: BlogPostViewComponent},
-      {path: ':album-id/:item-id', component: ItemViewComponent}
-    ]
-  },
-  {
-    path: '',
-    component: LoginLayoutComponent,
-    children: [
-      {path: '**', component: LoginComponent},
-      {path: 'login', component: LoginComponent}
-    ]
-  }
-];
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -64,9 +42,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AuthenticationModule,
     NgbModule,
-    RouterModule.forRoot(routes)
   ],
   providers: [
     AlbumService,

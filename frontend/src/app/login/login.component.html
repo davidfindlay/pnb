@@ -4,20 +4,29 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           <h1 class="card-title text-center">Sign In</h1>
-          <form class="form-signin">
+
+          <div class="card bg-danger" *ngIf="authFailed">
+            Unable to log in with this username and password!
+          </div>
+
+          <form class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label for="inputEmail">Email address</label>
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+              <label for="inputUsername">Username</label>
+              <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus
+                [(ngModel)]="user.username" name="username">
             </div>
             <div class="form-group">
               <label for="inputPassword">Password</label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
+                     [(ngModel)]="user.password" name="password">
             </div>
             <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input" id="customCheck1">
+              <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="user.remember"
+                name="remember">
               <label class="custom-control-label" for="customCheck1">Remember password</label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                    [disabled]="!loginForm.form.valid">Sign in</button>
           </form>
         </div>
       </div>
