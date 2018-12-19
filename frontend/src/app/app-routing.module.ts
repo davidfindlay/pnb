@@ -19,7 +19,7 @@ const routes: Routes = [
       {path: 'albums/:album-id', component: GalleryComponent},
       {path: 'albums/:album-id/blog', component: BlogPostViewComponent},
       {path: 'albums/:album-id/:item-id', component: ItemViewComponent},
-      {path: 'login', component: LoginComponent}
+      // {path: 'login', component: LoginComponent}
     ]
   },
   {
