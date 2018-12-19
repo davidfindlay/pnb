@@ -108,6 +108,12 @@ export class AuthenticationService implements AuthService {
    * @param {AccessData} data
    */
   private saveAccessData({ access, refresh }: AccessData) {
+
+    if (access == null || refresh == null) {
+      this.tokenStorage.clear();
+      return;
+    }
+
     this.tokenStorage
       .setAccessToken(access)
       .setRefreshToken(refresh);
