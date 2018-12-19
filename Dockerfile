@@ -7,6 +7,7 @@ WORKDIR /code
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
+RUN mkdir /code/static
 WORKDIR /code/frontend
 RUN npm install -g @angular/cli
 RUN npm install
