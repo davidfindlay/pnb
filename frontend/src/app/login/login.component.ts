@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   user: User;
   returnUrl: string;
+  authFailed: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.authFailed = false;
     const obs = this.authService.login(this.user.username, this.user.password);
     obs.subscribe((data) => {
       console.log(data);
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
     },
       (err) => {
       console.log(err);
+      this.authFailed = true;
       });
   }
 

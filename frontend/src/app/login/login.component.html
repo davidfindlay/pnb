@@ -4,6 +4,11 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           <h1 class="card-title text-center">Sign In</h1>
+
+          <div class="card bg-danger" *ngIf="authFailed">
+            Unable to log in with this username and password!
+          </div>
+
           <form class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <label for="inputUsername">Username</label>
