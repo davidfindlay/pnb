@@ -70,7 +70,7 @@ export class AuthenticationService implements AuthService {
    * @returns {boolean}
    */
   public refreshShouldHappen(response: HttpErrorResponse): boolean {
-    return response.status === 401
+    return response.status === 401;
   }
 
   /**
