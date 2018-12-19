@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -97,6 +98,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -149,9 +159,6 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'spa.storage.SPAStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Add static_root for django admin page.
-STATIC_ROOT = '/static/'
-
 # We are using python-decouple (https://pypi.org/project/python-decouple/) to remove sensitive information from
 # Django settings.
 # Use web_variables.env to determine which web environment to use.
@@ -160,4 +167,3 @@ SECRET_KEY = config('SECRET_KEY')
 if os.environ['DJANGO_SERVER_TYPE'] == 'development':
     DEBUG = config('DEBUG_TEST')
     ALLOWED_HOSTS = config('ALLOWED_HOSTS_TEST', cast=Csv())
-

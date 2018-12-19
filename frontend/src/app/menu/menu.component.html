@@ -2,9 +2,15 @@
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" [routerLink]="['/newsfeed']">
+        <a class="nav-link" [routerLink]="['/newsfeed']" routerLinkActive="active">
           <span data-feather="home"></span>
-          Latest Items <span class="sr-only">(current)</span>
+          Latest Items
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link" [routerLink]="" (click)="logOut()">
+          <span data-feather="home"></span>
+          Logout
         </a>
       </li>
       <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -14,7 +20,7 @@
         </a>
       </h6>
       <li class="nav-item" *ngFor="let album of albums">
-        <a class="nav-link" [routerLink]="['/', album.id]" [routerLinkActive]="active">
+        <a class="nav-link" [routerLink]="['/albums/', album.id]" routerLinkActive="active">
           {{album.title}}
         </a>
       </li>

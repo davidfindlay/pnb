@@ -1,0 +1,9 @@
+<main role="main">
+  <h1>{{albumTitle}}</h1>
+  <p>
+    {{albumDescription}}
+  </p>
+  <div class="col-md-12" *ngFor="let gItem of galleryItems">
+    <app-blog-post-item galleryItem="gItem"></app-blog-post-item>
+  </div>
+</main>
