@@ -8,6 +8,6 @@ ADD requirements.txt /code/
 RUN pip install -r requirements.txt
 ADD . /code/
 WORKDIR /code/frontend
-RUN npm install
 RUN npm install -g @angular/cli
+RUN npm install
 RUN ng build --outputPath=/code/static
