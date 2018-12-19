@@ -19,7 +19,12 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.albums = this.albumService.getAlbums();
+    this.albumService.getAlbums().subscribe(
+      (data) => {
+        console.log(data);
+        this.albums = data;
+      }
+    );
   }
 
   isLoggedIn() {
