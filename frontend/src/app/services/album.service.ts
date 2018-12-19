@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Album} from '../models/album';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,15 @@ export class AlbumService {
 
   getAlbums() {
     console.log('Album service getAlbums()');
+    return this.http.get<Album[]>('http://localhost:8000/api/albums');
+  }
 
-    return this.http.get('http://localhost:8000/api/albums');
+  getAlbumDetails(albumId) {
+    console.log('Album service getAlbumItems');
+    return this.http.get<Album>('http://localhost:8000/api/albums/' + albumId);
   }
 
   getAlbumItem(albumId, itemId) {
-
-    // const currentAlbum = this.albums.find(x => x.id === albumId);
-    // console.log(currentAlbum.items);
-    // const item = currentAlbum.items.find(x => x.id === parseInt(itemId));
-    // console.log(item);
-    //
-    // return item;
-
+    return null;
   }
-
 }

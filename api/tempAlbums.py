@@ -26,7 +26,11 @@ class AlbumItems(APIView):
 
     def get(self, request, format=None):
 
-        albumItems = [{
+        album = {
+            'id': 'test-album',
+            'title': 'Test Album',
+            'description': 'This is our test album',
+            'items': [{
                     'id': 1,
                     'type': 'image',
                     'file': 'album_image_1.jpg',
@@ -48,5 +52,5 @@ class AlbumItems(APIView):
                     'description': 'This is a test item number 3'
                 }
             ]
-
-        return Response(albumItems)
+        }
+        return Response(album)
