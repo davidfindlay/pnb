@@ -32,12 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework',
     'profiles',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -169,5 +167,3 @@ SECRET_KEY = config('SECRET_KEY')
 if os.environ['DJANGO_SERVER_TYPE'] == 'development':
     DEBUG = config('DEBUG_TEST')
     ALLOWED_HOSTS = config('ALLOWED_HOSTS_TEST', cast=Csv())
-
-CORS_ORIGIN_ALLOW_ALL = DEBUG
