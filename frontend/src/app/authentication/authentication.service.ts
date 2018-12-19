@@ -6,8 +6,8 @@ import { AuthService } from 'ngx-auth';
 import {TokenStorage} from './token.service';
 
 interface AccessData {
-  accessToken: string;
-  refreshToken: string;
+  access: string;
+  refresh: string;
 }
 
 @Injectable()
@@ -107,10 +107,10 @@ export class AuthenticationService implements AuthService {
    * @private
    * @param {AccessData} data
    */
-  private saveAccessData({ accessToken, refreshToken }: AccessData) {
+  private saveAccessData({ access, refresh }: AccessData) {
     this.tokenStorage
-      .setAccessToken(accessToken)
-      .setRefreshToken(refreshToken);
+      .setAccessToken(access)
+      .setRefreshToken(refresh);
   }
 
 }
