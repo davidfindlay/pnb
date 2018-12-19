@@ -14,7 +14,7 @@
         </a>
       </h6>
       <li class="nav-item" *ngFor="let album of albums">
-        <a class="nav-link" [routerLink]="['/', album.id]" [routerLinkActive]="active">
+        <a class="nav-link" routerLink="['/', album.id]" routerLinkActive="active">
           {{album.title}}
         </a>
       </li>

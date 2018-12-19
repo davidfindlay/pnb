@@ -51,7 +51,7 @@ export class AuthenticationService implements AuthService {
       .getRefreshToken()
       .pipe(
         switchMap((refreshToken: string) =>
-          this.http.post(`http://localhost:3000/refresh`, { refreshToken })
+          this.http.post(`http://localhost:8000/api/token/refresh/`, { refreshToken })
         ),
         tap((tokens: AccessData) => this.saveAccessData(tokens)),
         catchError((err) => {
@@ -87,8 +87,9 @@ export class AuthenticationService implements AuthService {
    * EXTRA AUTH METHODS
    */
 
-  public login(): Observable<any> {
-    return this.http.post(`http://localhost:3000/login`, { })
+  public login(username, password): Observable<any> {
+    console.log('login request for ' + username);
+    return this.http.post(`http://localhost:8000/api/token/`, {'username': username, 'password': password})
       .pipe(tap((tokens: AccessData) => this.saveAccessData(tokens)));
   }
 
