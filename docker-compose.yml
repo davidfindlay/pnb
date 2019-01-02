@@ -10,7 +10,9 @@ services:
     working_dir: /code
     env_file:
       - web_variables.env
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: sh devservers.sh
+    volumes:
+      - .:/code
     ports:
       - "8000:8000"
     depends_on:

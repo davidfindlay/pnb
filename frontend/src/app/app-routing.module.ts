@@ -8,6 +8,7 @@ import {BlogPostViewComponent} from './blog-post-view/blog-post-view.component';
 import {ItemViewComponent} from './item-view/item-view.component';
 import {LoginLayoutComponent} from './layouts/login-layout/login-layout.component';
 import {LoginComponent} from './login/login.component';
+import {CreateAlbumComponent} from './create-album/create-album.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     canActivate: [ProtectedGuard],
     children: [
       {path: 'newsfeed', component: NewsfeedComponent},
+      {path: 'albums/new', component: CreateAlbumComponent},
       {path: 'albums/:album-id', component: GalleryComponent},
       {path: 'albums/:album-id/blog', component: BlogPostViewComponent},
       {path: 'albums/:album-id/:item-id', component: ItemViewComponent},

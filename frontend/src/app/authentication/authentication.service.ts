@@ -50,11 +50,14 @@ export class AuthenticationService implements AuthService {
     return this.tokenStorage
       .getRefreshToken()
       .pipe(
-        switchMap((refreshToken: string) =>
-          this.http.post(`http://localhost:8000/api/token/refresh/`, { refreshToken })
+        switchMap((refreshToken: string) => {
+            console.log('Try to refresh token');
+            return this.http.post(`http://localhost:8000/api/token/refresh/`, {refreshToken});
+          }
         ),
         tap((tokens: AccessData) => this.saveAccessData(tokens)),
         catchError((err) => {
+          console.log('error refreshing token');
           this.logout();
 
           return Observable.throw(err);

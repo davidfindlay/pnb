@@ -21,6 +21,7 @@ import {LoginComponent} from './login/login.component';
 import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
 import {LoginLayoutComponent} from './layouts/login-layout/login-layout.component';
 import {FormsModule} from '@angular/forms';
+import { CreateAlbumComponent } from './create-album/create-album.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {FormsModule} from '@angular/forms';
     NewsfeedItemComponent,
     LoginComponent,
     HomeLayoutComponent,
-    LoginLayoutComponent
+    LoginLayoutComponent,
+    CreateAlbumComponent
   ],
   imports: [
     BrowserModule,

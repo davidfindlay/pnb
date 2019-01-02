@@ -1,6 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Album} from '../models/album';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'dataType': 'json',
+    'Content-Type':  'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +29,11 @@ export class AlbumService {
 
   getAlbumItem(albumId, itemId) {
     return null;
+  }
+
+  createAlbum(album) {
+    console.log('Create album');
+    console.log(album);
+    return this.http.post<Album>('http://localhost:8000/api/albums/', {album}, httpOptions);
   }
 }
