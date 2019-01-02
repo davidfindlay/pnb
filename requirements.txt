@@ -6,3 +6,4 @@ django-spa
 djangorestframework
 djangorestframework-simplejwt
 django-cors-headers
+Pillow
