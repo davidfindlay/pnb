@@ -19,12 +19,12 @@ export class AlbumService {
 
   getAlbums() {
     console.log('Album service getAlbums()');
-    return this.http.get<Album[]>('http://localhost:8000/api/albums');
+    return this.http.get<Album[]>('/api/albums');
   }
 
   getAlbumDetails(albumId) {
     console.log('Album service getAlbumItems');
-    return this.http.get<Album>('http://localhost:8000/api/albums/' + albumId);
+    return this.http.get<Album>('/api/albums/' + albumId);
   }
 
   getAlbumItem(albumId, itemId) {
@@ -34,6 +34,6 @@ export class AlbumService {
   createAlbum(album) {
     console.log('Create album');
     console.log(album);
-    return this.http.post<Album>('http://localhost:8000/api/albums/', {album}, httpOptions);
+    return this.http.post<Album>('/api/albums/', {album}, httpOptions);
   }
 }
