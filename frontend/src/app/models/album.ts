@@ -5,5 +5,5 @@ export class Album {
   public title: string;
   public album_stub: string;
   public description: string;
-  // public items: AlbumItem[];
+  public items: AlbumItem[];
 }
