@@ -12,7 +12,7 @@ class IsAuthenticatedOrWriteOnly(BasePermission):
         return (
             request.method in write_method or
             request.user and
-            request.user.is_authenticated()
+            request.user.is_authenticated
         )
 
 
