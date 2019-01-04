@@ -8,7 +8,7 @@ UserModel = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(UserModel, on_delete=models.CASCADE)
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
     # avatar = will link to images
 
     # @receiver(post_save, sender=UserModel)
