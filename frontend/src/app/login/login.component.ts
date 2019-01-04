@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user';
 import {AuthenticationService} from '../authentication';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,12 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthenticationService) { this.user = new User(); }
+              private authService: AuthenticationService,
+              private spinner: NgxSpinnerService) { this.user = new User(); }
 
   ngOnInit() {
+
+    this.spinner.hide();
 
     // Reset login status
     this.authService.logout();

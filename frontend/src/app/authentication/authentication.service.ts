@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap, map, switchMap, catchError } from 'rxjs/operators';
+import {tap, map, switchMap, catchError, timeout} from 'rxjs/operators';
 import { AuthService } from 'ngx-auth';
 import {TokenStorage} from './token.service';
+import {Router} from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 interface AccessData {
   access: string;
@@ -15,7 +17,9 @@ export class AuthenticationService implements AuthService {
 
   constructor(
     private http: HttpClient,
-    private tokenStorage: TokenStorage
+    private tokenStorage: TokenStorage,
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   /**
@@ -47,18 +51,30 @@ export class AuthenticationService implements AuthService {
    * @returns {Observable<any>}
    */
   public refreshToken(): Observable <AccessData> {
+
+    this.spinner.show();
+
+    console.log('refreshToken');
+
     return this.tokenStorage
       .getRefreshToken()
       .pipe(
-        switchMap((refreshToken: string) => {
-            console.log('Try to refresh token');
-            return this.http.post(`/api/token/refresh/`, {refreshToken});
-          }
+        switchMap((refreshToken: string) =>
+          this.http.post(`/api/token/refresh/`, { refreshToken })
         ),
-        tap((tokens: AccessData) => this.saveAccessData(tokens)),
+        timeout(5000),
+        tap((tokens: AccessData) => {
+          console.log('got tokens');
+          console.log(tokens);
+          this.saveAccessData(tokens);
+          this.spinner.hide();
+        }),
         catchError((err) => {
-          console.log('error refreshing token');
+          console.log('caught error, do logout');
+          console.log(err);
           this.logout();
+
+          this.router.navigate(['/login']);
 
           return Observable.throw(err);
         })
