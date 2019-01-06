@@ -1,0 +1,30 @@
+<main role="main">
+  <h1>Add New User</h1>
+
+  <form class="form-new-user" #newUser="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="inputUsername">Username: </label>
+      <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus
+             [(ngModel)]="user.username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">Password: </label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus
+             [(ngModel)]="user.password" name="password">
+    </div>
+    <div class="form-group">
+      <label for="inputConfirmPassword">Confirm Password: </label>
+      <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required autofocus
+             [(ngModel)]="user.confirmpassword" name="confirmpassword">
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email: </label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Album Stub" autofocus
+             [(ngModel)]="user.email" name="email">
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+            [disabled]="!newUser.form.valid">New User</button>
+  </form>
+
+</main>

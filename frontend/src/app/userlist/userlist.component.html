@@ -1,0 +1,21 @@
+<main role="main">
+  <h1>User List</h1>
+
+  <div class="card mb-2" *ngFor="let user of users">
+    <div class="card-body">
+      <h2 *ngIf="user.first_name != null && user.last_name != null">
+        <a [routerLink]="user.id">
+          {{user.first_name}} {{user.last_name}}
+        </a>
+      </h2>
+      aaa
+      <h2 *ngIf="user.first_name == null && user.last_name == null">
+        {{user.username}}dafda
+      </h2>
+      <p *ngIf="user.profile != undefined && user.profile.bio != null">
+        {{user.profile?.bio}}
+      </p>
+    </div>
+  </div>
+
+</main>
