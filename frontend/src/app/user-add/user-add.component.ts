@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user';
 import {UserService} from '../services/user.service';
 import {Album} from '../models/album';
+import {Profile} from '../models/profile';
 
 @Component({
   selector: 'app-user-add',
@@ -12,7 +13,10 @@ export class UserAddComponent implements OnInit {
 
   user: User;
 
-  constructor(private userService: UserService) { this.user = new User();  }
+  constructor(private userService: UserService) {
+    this.user = new User();
+    this.user.profile = new Profile();
+  }
 
   ngOnInit() {
   }

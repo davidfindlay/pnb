@@ -30,7 +30,7 @@ export class UserService {
 
   newUser(user) {
     console.log('New User');
-    return this.http.put('/api/users/', user, httpOptions);
+    return this.http.post('/api/users/', user, httpOptions);
   }
 
   updateUser(user) {
