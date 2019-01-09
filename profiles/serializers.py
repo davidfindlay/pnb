@@ -41,11 +41,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Create a linked profile for each user account as they are made.
-        profile_data = validated_data.pop('profile', None)
         user = UserModel.objects.create(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
-        Profile.objects.create(user=user, **profile_data)
+        Profile.objects.create(user=user)
         return user
 
     def update(self, instance, validated_data):
