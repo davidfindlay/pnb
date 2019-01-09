@@ -1,0 +1,31 @@
+<main role="main">
+
+  <h1 *ngIf="user === undefined || user == null else userDetails">User Not Found</h1>
+
+  <ng-template #userDetails>
+
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+
+    <p>
+      <strong>First Name:</strong>
+      {{user.first_name}}
+    </p>
+
+    <p>
+      <strong>Last Name:</strong>
+      {{user.last_name}}
+    </p>
+
+    <p>
+      <strong>Username:</strong>
+      {{user.username}}
+    </p>
+
+    <p>
+      <strong>Bio:</strong>
+      {{user.profile?.bio}}
+    </p>
+
+  </ng-template>
+
+</main>

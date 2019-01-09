@@ -1,0 +1,46 @@
+<main role="main">
+  <h1>Edit Profile</h1>
+
+  <form class="form-new-user" #editProfile="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="inputUsername">Username: </label>
+      <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus
+             [(ngModel)]="user.username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="inputPassword">Password: </label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus
+             [(ngModel)]="user.password" name="password">
+    </div>
+    <div class="form-group">
+      <label for="inputConfirmPassword">Confirm Password: </label>
+      <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required autofocus
+             [(ngModel)]="user.confirmpassword" name="confirmpassword">
+    </div>
+    <div class="form-group">
+      <label for="inputFirstName">First Name: </label>
+      <input type="text" id="inputFirstName" class="form-control" placeholder="First name" autofocus
+             [(ngModel)]="user.first_name" name="first_name">
+    </div>
+    <div class="form-group">
+      <label for="inputLastName">Last Name: </label>
+      <input type="text" id="inputLastName" class="form-control" placeholder="Last name" autofocus
+             [(ngModel)]="user.last_name" name="last_name">
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email: </label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Album Stub" autofocus
+             [(ngModel)]="user.email" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="inputBio">Biography: </label>
+      <textarea id="inputBio" class="form-control" placeholder="Biography" autofocus
+                [(ngModel)]="user.profile.bio" name="bio"></textarea>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+            [disabled]="!editProfile.form.valid">Update Profile</button>
+  </form>
+
+</main>

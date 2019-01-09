@@ -23,6 +23,11 @@ import {LoginLayoutComponent} from './layouts/login-layout/login-layout.componen
 import {FormsModule} from '@angular/forms';
 import { CreateAlbumComponent } from './create-album/create-album.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import { UserlistComponent } from './userlist/userlist.component';
+import {UserService} from './services/user.service';
+import { UserDetailsComponent } from './userdetails/userdetails.component';
+import { UserAddComponent } from './user-add/user-add.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 
 @NgModule({
@@ -40,7 +45,11 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     LoginComponent,
     HomeLayoutComponent,
     LoginLayoutComponent,
-    CreateAlbumComponent
+    CreateAlbumComponent,
+    UserlistComponent,
+    UserDetailsComponent,
+    UserAddComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
   ],
   providers: [
     AlbumService,
-    FileService
+    FileService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
