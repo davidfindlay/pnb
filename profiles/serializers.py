@@ -78,3 +78,25 @@ class UserSerializer(serializers.ModelSerializer):
                 'password': 'This field may not be blank.'
             })
         return instance
+
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserModel
+        fields = (
+            'id', 'username', 'password', 'first_name', 'last_name', 'email',
+        )
+
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        # Create a linked profile for each user account as they are made.
+        user = UserModel.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.is_active = False
+        user.save()
+        Profile.objects.create(user=user)
+        return user
