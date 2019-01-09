@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 
-from rest_framework import routers
+from .trailing_slash_fix import OptionalSlashRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import (
 from profiles import views as profile_views
 from albums.urls import urlpatterns as albums_urls
 
-router = routers.DefaultRouter()
+router = OptionalSlashRouter()
 router.register(r'users', profile_views.UserViewSet, basename='users')
 
 # Wire up our API using automatic URL routing.

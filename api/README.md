@@ -165,7 +165,7 @@ This API endpoint does not currently enable password changing. That feature will
 
 #### Request
 ```html
-PATCH /api/users/<USER_NUMBER>
+PATCH /api/users/<USER_NUMBER>/
 ```
 
 #### Parameters
