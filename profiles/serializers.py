@@ -39,14 +39,6 @@ class UserSerializer(serializers.ModelSerializer):
             'password': {'write_only': True}
         }
 
-    def create(self, validated_data):
-        # Create a linked profile for each user account as they are made.
-        user = UserModel.objects.create(**validated_data)
-        user.set_password(validated_data['password'])
-        user.save()
-        Profile.objects.create(user=user)
-        return user
-
     def update(self, instance, validated_data):
         # Password checked before modifying user accounts.
         if 'password' in validated_data:

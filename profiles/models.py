@@ -22,4 +22,4 @@ class Profile(models.Model):
     #     instance.profile.save()
 
     def __str__(self):
-        return '{0}'.format(self.user.first_name)
+        return '{0}'.format(self.user.username)
