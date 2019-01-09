@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
 
 from rest_framework import viewsets
+from rest_framework import generics
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserRegistrationSerializer
 from api.extra_perms import IsAuthenticatedOrWriteOnly, IsOwnerOrAdmin
 
 
@@ -28,3 +29,12 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.request.method == 'PATCH' or self.request.method == 'PUT':
             self.permission_classes = (IsOwnerOrAdmin,)
         return super().get_permissions()
+
+
+class UserRegistrationViewSet(generics.CreateAPIView):
+    """
+        API Endpoint for user registration
+    """
+    queryset = UserModel.objects.all()
+    serializer_class = UserRegistrationSerializer
+    permission_classes = (IsAuthenticatedOrWriteOnly, )
