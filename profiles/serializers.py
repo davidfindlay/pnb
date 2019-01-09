@@ -21,6 +21,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
 
     profile = ProfileSerializer(required=False, partial=True)
+    new_password = serializers.CharField(required=False)
 
     class Meta:
         model = UserModel
@@ -32,6 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'email',
             'password',
+            'new_password',
             'profile',
         )
 
@@ -48,6 +50,10 @@ class UserSerializer(serializers.ModelSerializer):
                 instance.first_name = validated_data.get('first_name', instance.first_name)
                 instance.last_name = validated_data.get('last_name', instance.last_name)
                 instance.email = validated_data.get('email', instance.email)
+                # Check if a new password was submitted. If so, add it.
+                new_pw = validated_data.get('new_password', None)
+                if new_pw:
+                    instance.set_password(new_pw)
                 instance.save()
 
                 profile_data = validated_data.get('profile', None)
@@ -92,3 +98,13 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.save()
         Profile.objects.create(user=user)
         return user
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value

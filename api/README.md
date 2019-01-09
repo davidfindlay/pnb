@@ -181,6 +181,10 @@ PATCH /api/users/<USER_NUMBER>/
 
    Same as above.
 
+##### new_password
+
+   A new password for the user account.
+
 ##### first_name
 
    Same as above.
@@ -195,7 +199,7 @@ PATCH /api/users/<USER_NUMBER>/
 
 ##### profile.bio
 
-   Same as above.
+   Edit the user's display bio.
 
 #### Input
 ```html
