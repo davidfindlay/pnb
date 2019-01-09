@@ -4,13 +4,13 @@
 
 ### Creating a New User
 
-A `POST` request to `/api/user/` will create a new user account. Upon account create a new `user` instance is created along with a linked `profile`.
+A `POST` request to `/api/register/` will create a new user account. Upon account create a new `user` instance is created along with a linked `profile`.
 After creating a new user account and profile, the API returns an instance of the user account.
 
 #### Request
 
 ```html
-POST /api/user/
+POST /api/register/
 ```
 
 #### Parameters

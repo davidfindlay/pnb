@@ -18,6 +18,7 @@ router.register(r'users', views.UserViewSet, basename='users')
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'register/', views.UserRegistrationViewSet.as_view()),
     url(r'^token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     url(r'^token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
     url(r'^token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
