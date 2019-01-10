@@ -18,25 +18,19 @@
              [(ngModel)]="user.confirmpassword" name="confirmpassword">
     </div>
     <div class="form-group">
-      <label for="inputFirstName">First Name: </label>
-      <input type="text" id="inputFirstName" class="form-control" placeholder="First Name" required autofocus
+      <label for="inputFirstName">Display Name: </label>
+      <input type="text" id="inputFirstName" class="form-control" placeholder="Display Name:" autofocus
              [(ngModel)]="user.first_name" name="first_name">
     </div>
     <div class="form-group">
-      <label for="inputLastName">Last Name: </label>
-      <input type="text" id="inputLastName" class="form-control" placeholder="Last Name" required autofocus
+      <label for="inputLastName">Association: </label>
+      <input type="text" id="inputLastName" class="form-control" placeholder="Association" autofocus
              [(ngModel)]="user.last_name" name="last_name">
     </div>
     <div class="form-group">
       <label for="inputEmail">Email: </label>
       <input type="text" id="inputEmail" class="form-control" placeholder="Email Address" required autofocus
              [(ngModel)]="user.email" name="email">
-    </div>
-
-    <div class="form-group">
-      <label for="inputBio">Bio: </label>
-      <input type="text" id="inputBio" class="form-control" placeholder="Biography" required autofocus
-             [(ngModel)]="user.profile.bio" name="bio">
     </div>
 
     <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"

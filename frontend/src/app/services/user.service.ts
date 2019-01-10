@@ -19,23 +19,19 @@ export class UserService {
   }
 
   getUsers() {
-    console.log('Users service getUsers()');
     return this.http.get<User[]>('/api/users');
   }
 
   getUserDetails(userId) {
-    console.log('Users service getUserDetails');
     return this.http.get<User>('/api/users/' + userId);
   }
 
   newUser(user) {
-    console.log('New User');
-    return this.http.post('/api/users/', user, httpOptions);
+    return this.http.post('/api/register/', user, httpOptions);
   }
 
-  updateUser(user) {
-    console.log('Update User');
-    return this.http.patch('/api/users/', user, httpOptions);
+  updateUser(user_id, user) {
+    return this.http.patch('/api/users/' + user_id + '/', user, httpOptions);
   }
 
 }

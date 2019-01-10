@@ -6,6 +6,7 @@ import { AuthService } from 'ngx-auth';
 import {TokenStorage} from './token.service';
 import {Router} from '@angular/router';
 import {NgxSpinnerService} from 'ngx-spinner';
+import * as jwt_decode from 'jwt-decode';
 
 interface AccessData {
   access: string;
@@ -14,6 +15,9 @@ interface AccessData {
 
 @Injectable()
 export class AuthenticationService implements AuthService {
+
+  private interruptedUrl: string;
+  private userId: number;
 
   constructor(
     private http: HttpClient,
@@ -109,7 +113,10 @@ export class AuthenticationService implements AuthService {
   public login(username, password): Observable<any> {
     console.log('login request for ' + username);
     return this.http.post(`/api/token/`, {'username': username, 'password': password})
-      .pipe(tap((tokens: AccessData) => this.saveAccessData(tokens)));
+      .pipe(tap((tokens: AccessData) => {
+        this.saveAccessData(tokens);
+        this.decodeUserId(tokens.access);
+      }));
   }
 
   /**
@@ -135,6 +142,31 @@ export class AuthenticationService implements AuthService {
     this.tokenStorage
       .setAccessToken(access)
       .setRefreshToken(refresh);
+  }
+
+  public getInterruptedUrl(): string {
+    return this.interruptedUrl;
+  }
+
+  public setInterruptedUrl(url: string): void {
+    this.interruptedUrl = url;
+  }
+
+  public decodeUserId(accessToken) {
+
+    try {
+      console.log(accessToken);
+      const tokenDecode = jwt_decode(accessToken);
+      this.userId = tokenDecode.user_id;
+      return this.userId;
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+
+  public getUserId() {
+    return this.userId;
   }
 
 }

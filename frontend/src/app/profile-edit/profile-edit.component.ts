@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../models/user';
 import {UserService} from '../services/user.service';
 import {Profile} from '../models/profile';
+import {AuthenticationService} from '../authentication';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile-edit',
@@ -11,28 +13,58 @@ import {Profile} from '../models/profile';
 export class ProfileEditComponent implements OnInit {
 
   user: User;
+  userId: Number;
 
-  constructor(private userService: UserService) {
+  password_incorrect = false;
+  success = false;
+
+  constructor(private userService: UserService,
+              private authService: AuthenticationService,
+              private spinner: NgxSpinnerService) {
     this.user = new User();
     this.user.profile = new Profile();
   }
 
   ngOnInit() {
+    this.spinner.show();
+
+    this.authService.getAccessToken().subscribe((accessToken) => {
+      this.userId = this.authService.decodeUserId(accessToken);
+
+      this.userService.getUserDetails(this.userId).subscribe(
+        (user: User) => {
+
+          if (user.profile == null) {
+            user.profile = new Profile();
+          }
+
+          this.user = user;
+          this.spinner.hide();
+        }
+      );
+    });
+
   }
 
   onSubmit() {
 
-    if (this.user.password !== this.user.confirmpassword) {
-      console.log('Passsword\'s don\'t match!');
-      return;
-    }
+    console.log(this.user);
 
-    this.userService.updateUser(this.user).subscribe((data) => {
-        console.log('submitted new user');
+    this.userService.updateUser(this.userId, this.user).subscribe((data) => {
+        console.log('update user ' + this.userId);
         console.log(data);
+        this.password_incorrect = false;
+        this.success = true;
       },
       (error) => {
-        console.log('error submitting new user');
+
+        this.success = false;
+
+        if ('password' in error.error) {
+          this.password_incorrect = true;
+        }
+
+        console.log('error submitting profile edit');
         console.log(error);
       }
     );

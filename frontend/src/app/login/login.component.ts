@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     obs.subscribe((data) => {
       console.log(data);
       if (this.authService.isAuthorized()) {
-        this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl(this.authService.getInterruptedUrl());
       }
     },
       (err) => {
