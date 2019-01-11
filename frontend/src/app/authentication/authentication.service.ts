@@ -64,7 +64,7 @@ export class AuthenticationService implements AuthService {
       .getRefreshToken()
       .pipe(
         switchMap((refreshToken: string) =>
-          this.http.post(`/api/token/refresh/`, { refreshToken })
+          this.http.post(`/api/token/refresh/`, { 'refresh': refreshToken })
         ),
         timeout(5000),
         tap((tokens: AccessData) => {
@@ -103,7 +103,7 @@ export class AuthenticationService implements AuthService {
    * @returns {boolean}
    */
   public verifyTokenRequest(url: string): boolean {
-    return url.endsWith('/refresh');
+    return url.endsWith('/refresh/');
   }
 
   /**
@@ -132,16 +132,23 @@ export class AuthenticationService implements AuthService {
    * @private
    * @param {AccessData} data
    */
-  private saveAccessData({ access, refresh }: AccessData) {
+  private saveAccessData({access, refresh}: AccessData) {
 
-    if (access == null || refresh == null) {
+    if (access == null && refresh == null) {
+      console.log('Clear tokens cause new ones are null');
       this.tokenStorage.clear();
       return;
     }
 
-    this.tokenStorage
-      .setAccessToken(access)
-      .setRefreshToken(refresh);
+    if (access != null) {
+      console.log('Store access token');
+      this.tokenStorage.setAccessToken(access);
+    }
+
+    if (refresh != null) {
+      console.log('Store refresh token');
+      this.tokenStorage.setRefreshToken(refresh);
+    }
   }
 
   public getInterruptedUrl(): string {

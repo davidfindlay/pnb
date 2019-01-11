@@ -55,6 +55,7 @@ export class ProfileEditComponent implements OnInit {
         console.log(data);
         this.password_incorrect = false;
         this.success = true;
+        this.user.password = null;
       },
       (error) => {
 
@@ -66,8 +67,12 @@ export class ProfileEditComponent implements OnInit {
 
         console.log('error submitting profile edit');
         console.log(error);
+        this.user.password = null;
       }
     );
+
+    window.scrollTo(0, 0);
+
   }
 
 }
