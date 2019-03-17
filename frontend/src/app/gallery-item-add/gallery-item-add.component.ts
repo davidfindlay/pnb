@@ -36,10 +36,7 @@ export class GalleryItemAddComponent implements OnInit {
 
     const fileInput: HTMLInputElement = this.inputFile.nativeElement;
 
-    this.albumService.addItem(this.album, this.albumItem, fileInput.files)
-      .subscribe((res) => {
-        console.log(res);
-      });
+    this.albumService.addItem(this.album, this.albumItem, fileInput.files);
 
   }
 

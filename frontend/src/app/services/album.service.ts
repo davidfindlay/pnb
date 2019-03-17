@@ -35,7 +35,7 @@ export class AlbumService {
   }
 
   getAlbumDetails(albumId) {
-    console.log('Album service getAlbumItems');
+    console.log('Album service getAlbumDetails');
     return this.http.get<Album>('/api/albums/' + albumId);
   }
 
@@ -61,6 +61,29 @@ export class AlbumService {
 
     console.log('Create Album Item');
 
+    this.addFiles(album, files).subscribe((fileData) => {
+
+      const addItem = item;
+
+      addItem.file = fileData.id;
+      addItem.type = 'image'; // Placeholder for future differentiation between videos and images
+      addItem.album = album.id;
+
+      console.log(addItem);
+
+      this.http.post('/api/albums/' + album.id + '/add/', addItem, httpOptions)
+        .subscribe((res) => {
+          console.log(res);
+        });
+
+    });
+
+  }
+
+  addFiles(album, files) {
+
+    console.log('Create Album File');
+
     if (!files || files.length === 0) {
       return throwError("Please select a file.");
     }
@@ -69,23 +92,30 @@ export class AlbumService {
       .append("Content-Type", 'multipart/form-data');
     const formData: FormData = new FormData();
 
-    formData.append('data', new Blob([JSON.stringify(item)],
-        {
-            type: "application/json"
-        }));
-
     for (let i = 0; i < files.length; i++) {
-      formData.append(files[i].name, files[i]);
+      formData.append('file', files[i]);
       console.log(files[i].name + ' - ' + files[i])
     }
 
-    return this.http.post('/api/albums/' + album.id + '/add/', formData, {headers})
+    return this.http.post('/api/albums/' + album.id + '/addfile/', formData)
       .pipe(
         tap( (res) => {
           console.log(res)
         })
       )
 
+  }
+
+  getItems(album) {
+    console.log('Get items from album: ' + album.id);
+
+    return this.http.get('/api/albums/' + album.id + '/items/');
+  }
+
+  getFile(fileId) {
+    console.log('Get file' + fileId);
+
+    return this.http.get('/api/files/' + fileId + '/');
   }
 
 }

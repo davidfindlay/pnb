@@ -39,10 +39,15 @@ export class GalleryComponent implements OnInit {
   }
 
   loadAlbum(data: Album) {
-      this.albumId = data.id;
-      this.albumTitle = data.title;
-      this.albumDescription = data.description;
-      this.galleryItems = data.items;
+    this.albumId = data.id;
+    this.albumTitle = data.title;
+    this.albumDescription = data.description;
+
+    this.albumService.getItems(data).subscribe((items: AlbumItem[]) => {
+      this.galleryItems = items;
+      console.log(this.galleryItems);
+    });
+
   }
 
   blogView() {

@@ -4,24 +4,27 @@ from albums.models import Album, AlbumItem, AlbumItemFile
 from pnb import settings
 
 
-class AlbumItemSerializer(serializers.ModelSerializer):
+class AlbumItemFileSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField()
     owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
-    class Meta:
-        model = AlbumItem
-        fields = ('id', 'type', 'file', 'title', 'description', 'owner')
-        read_only_fields = ('owner',)
-
-
-class AlbumItemFileSerializer(serializers.ModelSerializer):
-    file_url = serializers.SerializerMethodField()
-
-    def get_file_url(self, obj):
+    def get_url(self, obj):
         return '%s' % (obj.file)
 
     class Meta:
         model = AlbumItemFile
-        fields = ('id', 'file_url')
+        fields = ('id', 'file', 'url', 'owner')
+        read_only_fields = ('owner',)
+
+
+class AlbumItemSerializer(serializers.ModelSerializer):
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    # file = AlbumItemFileSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = AlbumItem
+        fields = ('id', 'album', 'type', 'file', 'title', 'description', 'owner')
+        read_only_fields = ('owner',)
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -29,17 +32,6 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Album
-        fields = ('id', 'title', 'description', 'items', 'owner')
+        fields = ('id', 'title', 'description', 'owner')
         read_only_fields = ('owner',)
 
-    def create(self, validated_data):
-
-        print(serializers.CurrentUserDefault())
-
-        items_data = validated_data.pop('items')
-        album = Album.objects.create(**validated_data)
-
-        for item_data in items_data:
-            AlbumItem.objects.create(album=album, **item_data)
-
-        return album

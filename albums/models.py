@@ -18,6 +18,7 @@ def user_directory_path(instance, filename):
 # Album Files
 class AlbumItemFile(models.Model):
     file = models.ImageField(upload_to=user_directory_path)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 # Album Items

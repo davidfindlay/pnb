@@ -6,8 +6,8 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework import generics
 
-from albums.models import Album, AlbumItem
-from albums.serializers import AlbumSerializer, AlbumItemSerializer
+from albums.models import Album, AlbumItem, AlbumItemFile
+from albums.serializers import AlbumSerializer, AlbumItemSerializer, AlbumItemFileSerializer
 from django.shortcuts import render
 
 
@@ -25,3 +25,22 @@ class AlbumDetail(generics.RetrieveUpdateDestroyAPIView):
 class AlbumItemAdd(generics.CreateAPIView):
     queryset = AlbumItem.objects.all()
     serializer_class = AlbumItemSerializer
+
+
+class AlbumItemFileAdd(generics.CreateAPIView):
+    queryset = AlbumItemFile.objects.all()
+    serializer_class = AlbumItemFileSerializer
+
+
+class AlbumListItems(generics.ListAPIView):
+    serializer_class = AlbumItemSerializer
+
+    def get_queryset(self):
+        album_id = self.kwargs['pk']
+
+        return AlbumItem.objects.filter(album=album_id)
+
+
+class AlbumItemGetFile(generics.RetrieveAPIView):
+    queryset = AlbumItemFile.objects.all()
+    serializer_class = AlbumItemFileSerializer
