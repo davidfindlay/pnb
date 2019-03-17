@@ -33,9 +33,22 @@ export class AuthenticationService implements AuthService {
    * @memberOf AuthService
    */
   public isAuthorized(): Observable < boolean > {
+    // return this.tokenStorage
+    //   .getAccessToken()
+    //   .pipe(map(token => !!token));
+
     return this.tokenStorage
       .getAccessToken()
-      .pipe(map(token => !!token));
+      .pipe(map((token) => {
+        if (token != null) {
+          const user_id = this.decodeUserId(token);
+          if (user_id != null) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }));
   }
 
   /**
@@ -167,7 +180,7 @@ export class AuthenticationService implements AuthService {
       this.userId = tokenDecode.user_id;
       return this.userId;
     } catch (err) {
-      console.log(err);
+      return;
     }
 
   }

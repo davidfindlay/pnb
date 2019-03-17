@@ -19,7 +19,8 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.albumService.getAlbums().subscribe(
+    this.albumService.getAlbums();
+    this.albumService.albumsUpdated.subscribe(
       (data) => {
         console.log(data);
         this.albums = data;

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FileService} from '../services/file.service';
 import {AlbumService} from '../services/album.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AlbumItem} from "../models/album-item";
 
 @Component({
   selector: 'app-item-view',
@@ -10,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ItemViewComponent implements OnInit {
 
-  item;
+  item: AlbumItem;
   filename: string;
 
   constructor(private route: ActivatedRoute,
@@ -25,23 +26,8 @@ export class ItemViewComponent implements OnInit {
 
     console.log('Item view ' + albumId + ' - ' + itemId);
 
-    this.item = this.albumService.getAlbumItem(albumId, itemId);
-    console.log(this.item);
+    this.albumService.getAlbumItem(itemId);
 
-    if (this.item !== null && this.item !== undefined) {
-      const fileDetails = this.fileService.getFile(this.item.file);
-      this.filename = fileDetails.filename;
-    }
-
-  }
-
-  getFileUrl(id: Number) {
-    const fileDetails = this.fileService.getFile(id);
-    if (fileDetails !== undefined) {
-      return fileDetails.filename;
-    } else {
-      return '';
-    }
   }
 
   // Navigation functions

@@ -13,6 +13,7 @@ import {UserlistComponent} from './userlist/userlist.component';
 import {UserDetailsComponent} from './userdetails/userdetails.component';
 import {UserAddComponent} from './user-add/user-add.component';
 import {ProfileEditComponent} from './profile-edit/profile-edit.component';
+import {GalleryItemAddComponent} from './gallery-item-add/gallery-item-add.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       {path: 'newsfeed', component: NewsfeedComponent},
       {path: 'albums/new', component: CreateAlbumComponent},
       {path: 'albums/:album-id', component: GalleryComponent},
+      {path: 'albums/:album-id/add', component: GalleryItemAddComponent},
       {path: 'albums/:album-id/blog', component: BlogPostViewComponent},
       {path: 'albums/:album-id/:item-id', component: ItemViewComponent},
       {path: 'users', component: UserlistComponent},

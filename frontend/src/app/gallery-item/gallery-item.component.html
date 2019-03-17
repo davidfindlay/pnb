@@ -1,7 +1,7 @@
 <div class="card mb-4 box-shadow">
   <div class="card-img-top">
-    <a routerLink="{{galleryItem.id}}">
-      <img data-src="assets/testassets/{{getFileUrl(galleryItem.file)}}" alt="{{galleryItem.title}}">
+    <a routerLink="[{{galleryItem.id}}, galleryItem]">
+      <img data-src="{{galleryItem.file_url, }}" alt="{{galleryItem.title}}">
     </a>
   </div>
   <div class="card-body">

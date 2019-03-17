@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Album} from '../models/album';
 import {AlbumService} from '../services/album.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-album',
@@ -11,15 +12,20 @@ export class CreateAlbumComponent implements OnInit {
 
   album: Album;
 
-  constructor(private albumService: AlbumService) { this.album = new Album(); }
+  constructor(private albumService: AlbumService,
+              private router: Router) {
+    this.album = new Album();
+  }
 
   ngOnInit() {
+    // Initialise an empty array of album items
+    this.album.items = [];
   }
 
   onSubmit() {
-    this.albumService.createAlbum(this.album).subscribe((data) => {
+    const albumCreated = this.albumService.createAlbum(this.album).subscribe((newAlbum: Album) => {
         console.log('submitted new album');
-        console.log(data);
+        this.router.navigate(['/albums', newAlbum.id]);
       },
       (error) => {
         console.log('error submitting new album');

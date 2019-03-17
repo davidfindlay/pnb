@@ -23,17 +23,26 @@ export class GalleryComponent implements OnInit {
               private albumService: AlbumService) { }
 
   ngOnInit() {
-    const albumId = this.route.snapshot.paramMap.get('album-id');
+    this.albumId = this.route.snapshot.paramMap.get('album-id');
+    this.getAlbum();
 
-    this.albumService.getAlbumDetails(albumId).subscribe( (data: Album) => {
+    this.route.params.subscribe((params) => {
+      this.albumId = params['album-id'];
+      this.getAlbum();
+    });
+  }
 
+  getAlbum() {
+    this.albumService.getAlbumDetails(this.albumId).subscribe( (data: Album) => {
+      this.loadAlbum(data);
+    });
+  }
+
+  loadAlbum(data: Album) {
       this.albumId = data.id;
       this.albumTitle = data.title;
       this.albumDescription = data.description;
-
       this.galleryItems = data.items;
-      console.log(this.galleryItems);
-    });
   }
 
   blogView() {

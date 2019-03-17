@@ -28,6 +28,7 @@ import {UserService} from './services/user.service';
 import { UserDetailsComponent } from './userdetails/userdetails.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { GalleryItemAddComponent } from './gallery-item-add/gallery-item-add.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
     UserlistComponent,
     UserDetailsComponent,
     UserAddComponent,
-    ProfileEditComponent
+    ProfileEditComponent,
+    GalleryItemAddComponent
   ],
   imports: [
     BrowserModule,
